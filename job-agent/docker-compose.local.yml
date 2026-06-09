@@ -1,0 +1,15 @@
+# Docker Desktop local override — no HTTPS, no auth, ports exposed directly
+version: '3.9'
+
+services:
+  backend:
+    environment:
+      - DEPLOY_MODE=docker-local
+      - AUTH_ENABLED=false
+      - ALLOWED_ORIGINS=http://localhost:80,http://localhost:5173
+    ports:
+      - "8000:8000"
+
+  frontend:
+    ports:
+      - "80:80"

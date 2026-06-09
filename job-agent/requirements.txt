@@ -1,0 +1,17 @@
+fastapi
+uvicorn[standard]
+sqlalchemy[asyncio]
+aiosqlite
+python-multipart
+python-dotenv
+cryptography
+openai
+playwright
+python-docx
+pymupdf
+reportlab
+apscheduler
+httpx
+pydantic[email]
+bcrypt
+passlib[bcrypt]

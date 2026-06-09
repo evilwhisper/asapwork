@@ -1,0 +1,33 @@
+# Cloud VPS override — Caddy handles HTTPS + auth
+version: '3.9'
+
+services:
+  backend:
+    environment:
+      - DEPLOY_MODE=cloud
+      - AUTH_ENABLED=true
+    # Not exposed directly — Caddy proxies to it
+    expose:
+      - "8000"
+
+  frontend:
+    expose:
+      - "80"
+
+  caddy:
+    image: caddy:2-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - backend
+      - frontend
+    restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:

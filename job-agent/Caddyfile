@@ -1,0 +1,25 @@
+# Replace yourdomain.com with your actual domain or server IP
+# Caddy auto-provisions HTTPS via Let's Encrypt
+{$CADDY_HOST:yourdomain.com} {
+    # Proxy API to backend
+    handle /api/* {
+        reverse_proxy backend:8000
+    }
+
+    # Serve frontend static files
+    handle {
+        reverse_proxy frontend:80
+    }
+
+    # Security headers
+    header {
+        X-Content-Type-Options nosniff
+        X-Frame-Options DENY
+        Referrer-Policy strict-origin-when-cross-origin
+    }
+
+    log {
+        output stdout
+        format console
+    }
+}

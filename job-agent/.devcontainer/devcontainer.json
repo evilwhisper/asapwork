@@ -1,0 +1,34 @@
+{
+  "name": "Job Agent",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "20" }
+  },
+  "forwardPorts": [5173, 8000],
+  "portsAttributes": {
+    "5173": { "label": "Frontend", "onAutoForward": "openPreview" },
+    "8000": { "label": "Backend API" }
+  },
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "[python]": { "editor.defaultFormatter": "ms-python.python" }
+      }
+    }
+  },
+  "remoteEnv": {
+    "DEPLOY_MODE": "codespace",
+    "VITE_API_BASE_URL": "https://${localEnv:CODESPACE_NAME}-8000.app.github.dev"
+  }
+}

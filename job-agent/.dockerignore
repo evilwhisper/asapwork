@@ -1,0 +1,17 @@
+.env
+.env.cloud
+.env.local
+node_modules
+frontend/node_modules
+frontend/dist
+__pycache__
+*.pyc
+*.pyo
+.venv
+venv
+job_agent.db
+backend/uploads
+backend/logs
+.git
+.gitignore
+*.md
